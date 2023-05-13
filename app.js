@@ -1,13 +1,34 @@
 const express = require("express");
+const connectDB = require("./db/connect-db")
+require("dotenv").config();
+const notFound = require("./Middlewares/not-found")
 
 const app = express();
 
-app.use(express.static("./public"))
+app.use(express.static("./public"));
 
-app.get("/",(req,res)=>{
-       res.send("Server is live");    
-})
+//middleware
+app.use(express.json());
 
-app.listen(5000,()=>{
-    console.log(`Server is listening on port : 5000`);
-})
+
+const tasks = require("./Routes/tasks")
+app.use("/api/v1",tasks);
+app.use(notFound);
+
+
+
+const port = 5000 ;
+
+const start = async ()=>{
+    try {
+        await connectDB(process.env.MONGO_URI);
+        app.listen(port,()=>{
+            console.log(`Server is listening on port : ${port}`);
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+start();
