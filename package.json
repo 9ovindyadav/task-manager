@@ -2,7 +2,7 @@
   "name": "task-manager",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
@@ -16,5 +16,8 @@
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "mongoose": "^7.1.1"
-  }
+  },
+  "engines": {
+    "node": "^14.17.0"
+  },
 }
