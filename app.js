@@ -11,10 +11,11 @@ app.use(express.static("./public"));
 app.use(express.json());
 
 
-const tasks = require("./Routes/tasks")
+const tasks = require("./Routes/tasks");
+const errorHandlerMiddleware = require("./Middlewares/error-handler");
 app.use("/api/v1",tasks);
 app.use(notFound);
-
+app.use(errorHandlerMiddleware);
 
 
 const port = process.env.PORT || 5000 ;
